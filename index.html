@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Mawar Hotel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      background-color: #a29164;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+		align-items: center;
+    }
+
+    .menu-toggle {
+      font-size: 30px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: white;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #a29164;
+    }
+
+    .mobile-menu a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .mobile-menu a:hover {
+      background-color: #8a7b4f;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .book-now {
+      background-color: white;
+      color: #b6a36a;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+    }
+	  .book-now a {
+            display: inline-block;
+		  padding-left: 5px;
+            text-decoration: none;
+            color: darkgoldenrod;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+    /* Responsive nav */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #b6a36a;
+      }
+
+      nav.active {
+        display: flex;
+      }
+    }
+
+    /* Main Content */
+    .hero {
+	  position: relative;
+	  width: 100%;
+	  height: 300px;
+	  overflow: hidden;
+	}
+
+	.hero video {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	}
+
+    .content {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .content h2 {
+      text-align: center;
+      color: #222;
+    }
+
+    .content p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+	  
+	.rooms {
+	  padding: 40px 20px;
+	  text-align: center;
+	}
+
+	.room {
+	  margin-bottom: 30px;
+	}
+
+	.image-slider {
+		justify-content: center;
+	  display: flex;
+	  overflow-x: auto;
+	  scroll-snap-type: x mandatory;
+	  gap: 10px;
+	  scroll-behavior: smooth;
+	  padding-bottom: 10px;
+
+	  -webkit-overflow-scrolling: touch;
+	  touch-action: pan-x;
+	}
+
+	.image-slider:-webkit-scrollbar {
+	  display: none;
+	}
+	  
+	  .image-slider img {
+	  width: 100%;
+	  max-width: 200px; /* Smaller size than 300px */
+	  border-radius: 10px;
+	  scroll-snap-align: start;
+	  flex-shrink: 0;
+	}
+
+	.room h3 {
+	  margin-top: 15px;
+	  color: #5a4d2b;
+	}
+
+	.room p {
+	  color: #333;
+	  font-size: 15px;
+	}
+	  
+	  .room a {
+            display: inline-block;
+            padding: 12px 18px;
+            background: #b8860b;
+            text-decoration: none;
+            border-radius: 6px;
+            color: white;
+            transition: 0.3s;
+            margin-top: 12px;
+            font-size: 16px;
+        }
+        .room a:hover {
+            background: #d4af37;
+        }
+
+    /* Footer */
+    footer {
+      background-color: #b6a36a;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .footer-links {
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      font-weight: 500;
+    }
+
+    .social-icons {
+      margin: 15px 0;
+    }
+
+    .social-icons img {
+      width: 30px;
+      margin: 0 8px;
+    }
+
+    .footer-address {
+      font-size: 14px;
+      margin: 15px 0;
+    }
+
+    .email-subscribe {
+      margin: 20px 0;
+    }
+
+    .email-subscribe input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    .email-subscribe button {
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      color: #b6a36a;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .copyright {
+      font-size: 13px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+	  <img src="logo-hotel.png" alt="Mawar Hotel Logo" width="140" height="140" style="height: 90px;"></div>
+    <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#Rooms" class="btn">Rooms</a>
+    <a href="#meeting">Meeting Room</a>
+	<a href="#pool">Swimming Pool</a>
+	<a href="#resto">Restaurant</a>  
+    <a href="#spa">Spa</a>
+    <a href="about-us.html">About Us</a>
+    <a href="services.html">Service & Facilities</a>
+  </nav>
+
+  <!-- Book Now Bar -->
+  <div class="book-now">BOOK NOW<a href="book-now.html">*GO*</a></div>
+
+  <!-- video -->
+  <div class="hero">
+	<video autoplay muted loop playsinline style="width:100%; height:auto; object-fit:cover;">
+	  <source src="mawar-video.mp4" type="video/mp4">
+	  Your video does not support the video.
+	  </video>
+	</div>
+
+  <!-- Page Content -->
+  <div class="content">
+    <h2>Exclusive Hotel Deals & Holiday Packages</h2>
+    <p>Whether you are visiting Kuala Lumpur on business or for a family holiday, check out the special holiday packages, hotel offers, deals and promotions we are offering this month.</p>
+  </div>
+	
+	<section id="Rooms" class="rooms">
+  <h2>Our Rooms</h2>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="superior1.jpg" alt="Superior Room1">
+      <img src="superior2.jpg" alt="Superior Room2">
+      <img src="superior3.jpg" alt="Superior Room3">
+		
+    </div>
+    <h3>Superior Room</h3>
+    <p>A cozy space with all the essential comforts for a relaxing stay.</p>
+	  <a href="book-now.html">BOOK NOW</a>
+  </div>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="deluxe1.jpg" alt="Deluxe Room1">
+      <img src="deluxe2.jpg" alt="Deluxe Room2">
+      <img src="deluxe3.jpg" alt="Deluxe Room3">
+		
+    </div>
+    <h3>Deluxe Room</h3>
+    <p>Spacious room with elegant design and upgraded amenities.</p>
+	  <a href="book-now.html">BOOK NOW</a>
+  </div>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="suite1.jpg" alt="Suite1">
+      <img src="suite2.jpg" alt="Suite2">
+      <img src="suite3.jpg" alt="Suite3">
+		
+    </div>
+    <h3>Suite</h3>
+    <p>Luxurious suite with separate living area for a premium experience.</p>
+	  <a href="book-now.html">BOOK NOW</a>
+  </div>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="family1.jpg" alt="Family Room1">
+      <img src="family2.jpg" alt="Family Room2">
+      <img src="family3.jpg" alt="Family Room3">
+		
+    </div>
+    <h3>Family Room</h3>
+    <p>Perfect for families with extra space and multiple beds.</p>
+	  <a href="book-now.html">BOOK NOW</a>
+  </div>	
+	</section>
+	
+	<section id="meeting" class="rooms">
+  <h2>Meeting & Seminar Rooms</h2>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="meeting1.jpg" alt="Meeting Room">
+      <img src="meeting2.jpg" alt="Seminar Room">
+      <img src="meeting3.jpg" alt="Small Meeting Room">
+		
+    </div>
+    <p>Host productive events in our modern Meeting & Seminar Room, equipped with high-speed Wi-Fi, AV system, and flexible seating. Perfect for business meetings, and corporate events.</p>
+  </div>
+	</section>	
+		
+	<section id="pool" class="rooms">
+  <h2>Swimming Pool</h2>
+
+  <div class="room">
+    <div class="image-slider">
+      <img src="pool1.jpg" alt="pool1">
+      <img src="pool2.jpg" alt="pool2">
+      <img src="pool3.jpg" alt="pool3">
+		
+    </div>
+    <p>Relax and unwind at our refreshing Swimming Pool. With a scenic view and family-friendly design, it’s perfect for a morning swim or a peaceful sunbathing session.</p>
+  </div>
+	</section>
+		
+	<section id="resto" class="rooms">
+  <h2>Restaurant</h2>
+ <div class="room">
+    <div class="image-slider">
+      <img src="resto1.jpg" alt="Restaurant1">
+      <img src="resto2.jpg" alt="Restaurant2">
+      <img src="resto3.jpg" alt="Restaurant3">
+		
+    </div>
+    <p>Enjoy a delicious dining experience at our cozy Restaurant, serving a variety of local and international dishes prepared fresh daily by our talented chefs.</p>
+  </div>
+	</section>
+		
+	<section id="spa" class="rooms">
+  <h2>Spa & Sauna</h2>
+<div class="room">
+    <div class="image-slider">
+      <img src="spa1.jpg" alt="Spa1">
+      <img src="spa2.jpg" alt="Spa2">
+      <img src="spa3.jpg" alt="Spa3">
+		
+    </div>
+    <p>Give youth your body and mind at our Spa & Sauna. Offering massages, aromatherapy, and detox sessions in a calm, soothing environment.</p>
+  </div>		
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="about-us.html">ABOUT US</a>
+    </div>
+
+    <div class="social-icons">
+      <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook" />
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+    </div>
+
+    <div class="footer-address">
+      The Mawar Hotel<br>
+      Jalan Radin Anum, Bandar Baru Sri Petaling<br>
+      57000, Kuala Lumpur, Malaysia
+    </div>
+
+    <div class="email-subscribe">
+      <div>Be up to date</div>
+      <input type="email" placeholder="Your email" />
+      <a href="login.html"><button>ADMIN LOGIN</button></a>
+    </div>
+
+    <div class="copyright">
+      &copy; COPYRIGHT 2025 MAWAR HOTEL SDN BHD<br>
+      198401010793 (123333-T)
+    </div>
+  </footer>
+
+  <script>
+  function toggleMenu() {
+    var menu = document.getElementById("mobileMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+</script>
+</body>
+</html>

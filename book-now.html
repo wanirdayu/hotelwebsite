@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Now</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+	  
+	  .header {
+      background-color: #a29164;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+	  
+	  .header a {
+		  display: inline-block;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            color: white;
+            transition: 0.3s;
+            margin-top: 12px;
+            font-size: 16px;
+        }
+        .header a:hover {
+            background: #d4af37;
+        }
+	  
+    .logo {
+      display: flex;
+		align-items: center;
+    }
+
+    .booking-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #5a4d2b;
+    }
+
+    form {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    select, input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .flex-group {
+      display: flex;
+      gap: 20px;
+    }
+
+    .flex-group > div {
+      flex: 1;
+    }
+
+    .image-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      margin: 20px 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .image-slider img {
+      width: 300px;
+      border-radius: 10px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    .payment-options {
+      margin-top: 20px;
+    }
+
+    .payment-options label {
+      font-weight: normal;
+    }
+	  
+	  .meal-options label {
+      font-weight: normal;
+    }
+	  
+	  .total-price {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d2d2d;
+    }
+
+    .submit-btn {
+      background-color: #5a4d2b;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #3f361f;
+    }
+	  
+	  footer {
+      background-color: #b6a36a;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .footer-links {
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+      font-weight: 500;
+    }
+
+    .social-icons {
+      margin: 15px 0;
+    }
+
+    .social-icons img {
+      width: 30px;
+      margin: 0 8px;
+    }
+
+    .footer-address {
+      font-size: 14px;
+      margin: 15px 0;
+    }
+
+    .email-subscribe {
+      margin: 20px 0;
+    }
+
+    .email-subscribe input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    .email-subscribe button {
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      color: #b6a36a;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .copyright {
+      font-size: 13px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+	  <img src="logo-hotel.png" alt="Mawar Hotel Logo" width="140" height="140" style="height: 90px;"></div>
+		<a href="file:///C|/Users/User/Desktop/hotelwebsite/index.php">Menu/Home</a>
+  </header>
+  
+  <div class="booking-container">
+    <h2>Book Your Stay</h2>
+    <form method="POST" action="saveRegistration.php" name="regForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+      <label for="room">Room Type</label>
+      <select id="room" name="room" required>
+        <option value="">-- Select Room --</option>
+        <option value="superior-single" data-price="180">Superior 2 single - RM180/day</option>
+        <option value="superior" data-price="180">Superior - RM200/day</option>
+        <option value="deluxe" data-price="250">Deluxe - RM280/day</option>
+        <option value="suite" data-price="350">Suite - RM380/day</option>
+        <option value="family" data-price="500">Family - RM500/day</option>
+      </select>
+      
+
+      <div class="flex-group">
+        <div>
+          <label for="adults">Adults</label>
+          <select name="adults" id="adults" required>
+            <option value="">-- Select --</option>
+            <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		    <option value="6">6</option>
+		    <option value="7">7</option>
+		    <option value="8">8</option>
+		    <option value="9">9</option>
+		    <option value="10">10</option>
+          </select>
+        </div>
+        <div>
+          <label for="children">Children</label>
+          <select name="children" id="children">
+            <option value="">-- Select --</option>
+           <option value="1">1</option>
+		   <option value="2">2</option>
+		   <option value="3">3</option>
+		   <option value="4">4</option>
+		   <option value="5">5</option>
+		   <option value="6">6</option>
+		   <option value="7">7</option>
+		   <option value="8">8</option>
+		   <option value="9">9</option>
+		   <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex-group">
+        <div>
+          <label for="check-in">Check-in Date</label>
+          <input type="date" name="checkin" id="checkin" required>
+        </div>
+        <div>
+          <label for="check-out">Check-out Date</label>
+          <input type="date" name="checkout" id="checkout" required>
+        </div>
+      </div>
+		 
+		 <label>Meal Options</label>
+    <div class="meal-options">
+      <p><strong>Breakfast: </strong>Mandatory (RM25/adult, RM20/child/day)</p>
+      <label><input name="lunch" type="checkbox" id="lunch"> Add Lunch (RM30/adult, RM25/child)</label><br>
+      <label><input name="dinner" type="checkbox" id="dinner"> Add Dinner (RM30/adult, RM25/child)</label>
+    </div>
+
+      <label for="voucher">Have a Voucher?</label>
+      <input type="text" id="voucher" name="voucher" placeholder="Enter voucher code">
+
+      <div class="payment-options">
+        <label><input type="radio" name="payment" value="card" required> Credit/Debit Card</label><br>
+        <label><input type="radio" name="payment" value="paypal"> PayPal</label><br>
+        <label><input type="radio" name="payment" value="cash"> Pay at Hotel</label>
+      </div>
+		 
+		  <div class="total-price" name="total" id="total">Total Price: RM0</div>
+
+  <!-- Button Confirm Booking -->
+  <button type="submit" class="submit-btn">Confirm Booking</button>
+    </form>
+
+    <h2 style="margin-top: 60px;">Room Previews</h2>
+
+    <h3>Superior Room</h3>
+    <div class="image-slider">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/superior1.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/superior2.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/superior3.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/superior4.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/superior5.jpg" alt="">
+    </div>
+
+    <h3>Deluxe Room</h3>
+    <div class="image-slider">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/deluxe1.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/deluxe2.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/deluxe3.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/deluxe4.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/deluxe5.jpg" alt="">
+    </div>
+
+    <h3>Suite</h3>
+    <div class="image-slider">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/suite1.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/suite2.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/suite3.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/suite4.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/suite5.jpg" alt="">
+    </div>
+
+    <h3>Family Room</h3>
+    <div class="image-slider">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/family1.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/family2.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/family3.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/family4.jpg" alt="">
+      <img src="file:///C|/Users/User/Desktop/MawarHotel/family5.jpg" alt="">
+    </div>
+  </div>
+	
+	
+	
+	<script>
+  function calculateTotal() {
+    const room = document.getElementById('room');
+    const roomPrice = parseFloat(room.selectedOptions[0]?.dataset.price || 0);
+    const adults = parseInt(document.getElementById('adults').value) || 0;
+    const children = parseInt(document.getElementById('children').value) || 0;
+    const checkin = new Date(document.getElementById('checkin').value);
+    const checkout = new Date(document.getElementById('checkout').value);
+    const lunch = document.getElementById('lunch').checked;
+    const dinner = document.getElementById('dinner').checked;
+
+    const days = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+    if (days <= 0 || isNaN(days)) {
+      document.getElementById('total').textContent = "Total Price: RM0";
+      return;
+    }
+
+    const breakfastCost = (adults * 25 + children * 20) * days;
+    const lunchCost = lunch ? (adults * 30 + children * 25) * days : 0;
+    const dinnerCost = dinner ? (adults * 30 + children * 25) * days : 0;
+    const roomCost = roomPrice * days;
+
+    const total = roomCost + breakfastCost + lunchCost + dinnerCost;
+
+    document.getElementById('total').textContent = `Total Price: RM${total}`;
+  }
+
+  const inputs = ['room', 'adults', 'children', 'checkin', 'checkout', 'lunch', 'dinner'];
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener('change', calculateTotal);
+  });
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("Booking submitted successfully!");
+  });
+</script>
+
+ <footer>
+    <div class="footer-links">
+      <a href="file:///C|/Users/User/Desktop/MawarHotel/about-us.html">ABOUT US</a>
+    </div>
+
+    <div class="social-icons">
+      <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook" />
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+    </div>
+
+    <div class="footer-address">
+      The Mawar Hotel<br>
+      Jalan Radin Anum, Bandar Baru Sri Petaling<br>
+      57000, Kuala Lumpur, Malaysia
+    </div>
+
+    <div class="email-subscribe">
+      <div>Be up to date</div>
+      <input type="email" placeholder="Your email" />
+      <button>SIGN UP</button>
+    </div>
+
+    <div class="copyright">
+      &copy; COPYRIGHT 2025 MAWAR HOTEL SDN BHD<br>
+      198401010793 (123333-T)
+    </div>
+  </footer>
+</body>
+</html>
